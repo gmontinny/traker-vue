@@ -16,12 +16,12 @@
                         tarefas
                     </router-link>
                 </li>
-              <li>
-                <router-link to="/projetos" class="link">
-                  <i class="fas fa-tasks"></i>
-                  projetos
-                </router-link>
-              </li>
+                <li>
+                    <router-link to="/projetos" class="link">
+                      <i class="fas fa-project-diagram"></i>
+                      projetos
+                    </router-link>
+                </li>
             </ul>
         </nav>
     </header>
@@ -55,6 +55,26 @@
 </script>
 
 <style scoped>
+  h1{
+    text-align: center;
+  }
+
+  strong{
+    color: #f95738;
+  }
+
+  header{
+    background: #0d3b66;
+    width: 100%;
+    height: 100vh;
+    padding: 2rem;
+  }
+
+  @media only screen and (max-width: 768px) {
+      header{
+        height: auto;
+      }
+  }
 
   .panel li {
     margin: 8px 0;
@@ -75,7 +95,6 @@
     background: #0d3b66;
     width: 100%;
     height: 100vh;
-    text-align: center;
   }
   @media only screen and (max-width: 768px) {
     header {
