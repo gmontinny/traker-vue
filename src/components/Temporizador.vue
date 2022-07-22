@@ -1,54 +1,56 @@
 <template>
-  <div class="is-flex is-align-items-center is-justify-content-space-between">
-    <Cronometro :tempo-em-segundos="tempoEmSegundos" />
+  <section class="is-flex is-align-items-center is-justify-content-space-between">
+    <Cronometro :tempoEmSegundos="tempoEmSegundos"/>
     <button class="button" @click="iniciar" :disabled="cronometroRodando">
-                    <span class="icon">
-                        <i class="fas fa-play"></i>
-                    </span>
+      <span class="icon">
+        <i class="fas fa-play"></i>
+      </span>
       <span>play</span>
     </button>
     <button class="button" @click="finalizar" :disabled="!cronometroRodando">
-                    <span class="icon">
-                        <i class="fas fa-stop"></i>
-                    </span>
+      <span class="icon">
+        <i class="fas fa-stop"></i>
+      </span>
       <span>stop</span>
     </button>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
-import Cronometro from "@/components/Cronometro.vue";
+import { defineComponent } from "vue";
+import Cronometro from "./Cronometro.vue";
+
 export default defineComponent({
-  // eslint-disable-next-line vue/multi-word-component-names
   name: "Temporizador",
-  emits:['aoTemporizadorFinalizado'],
-  components: {Cronometro},
-  data(){
+  emits: ['aoFinalizarTarefa'],
+  components: {
+    Cronometro,
+  },
+  data () {
     return {
       tempoEmSegundos: 0,
-      cronometro: 0,
-      cronometroRodando: false
+      cronometroRodando: false,
+      cronometro: 0 
     }
   },
   methods: {
-    iniciar(){
-      // 1s = 1000 ms
-      this.cronometroRodando = true;
+    iniciar () : void {
+      this.cronometroRodando = true
       this.cronometro = setInterval(() => {
         this.tempoEmSegundos += 1
       }, 1000)
     },
-    finalizar(){
-      this.cronometroRodando = false;
+    finalizar () : void {
+      this.$emit('aoFinalizarTarefa', this.tempoEmSegundos)
+      this.tempoEmSegundos = 0
+      this.cronometroRodando = false
       clearInterval(this.cronometro)
-      this.$emit('aoTemporizadorFinalizado', this.tempoEmSegundos);
-      this.tempoEmSegundos = 0;
     }
   }
-})
+});
 </script>
-
 <style scoped>
-
+.button {
+  margin-left: 8px;
+}
 </style>
